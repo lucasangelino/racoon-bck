@@ -49,6 +49,20 @@ app.get("/api/question", (req, res) => {
     });
 });
 
+app.post("/api/answer", jsonParser, (req, res) => {
+  if (!req.body.author || !req.body.content) {
+    return res.status(400).json({ message: "Missing fields" });
+  }
+  const answer = req.body;
+  const newAnswer = new Answer({
+    author: answer.author,
+    content: answer.content,
+  });
+  newAnswer.save().then((savedAnswer) => {
+    return res.status(201).json({ code: 201, message: "Respuesta Creada" });
+  });
+});
+
 app.use(notFound);
 app.use(handleError);
 

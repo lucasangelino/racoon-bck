@@ -2,12 +2,8 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const answerSchema = new Schema({
-  answers: [
-    {
-      author: String,
-      content: String,
-    },
-  ],
+  author: String,
+  content: String,
 });
 answerSchema.set("toJSON", {
   transform: (document, returnedObject) => {
